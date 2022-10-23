@@ -1,0 +1,14 @@
+.auth__input {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  color: #fff;
+}
+
+.auth__input::placeholder {
+  font-size: 14px;
+  line-height: 17px;
+  color: #ccc;
+}

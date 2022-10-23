@@ -1,0 +1,10 @@
+.profile__container {
+  display: flex;
+}
+
+@media screen and (min-width: 1024px) {
+  .profile__container {
+    width: 336px;
+  }
+}
+

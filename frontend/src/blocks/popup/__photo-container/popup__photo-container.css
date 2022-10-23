@@ -1,0 +1,17 @@
+.popup__photo-container {
+  position: relative;
+  margin: 0 19px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__photo-container {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .popup__photo-container {
+    box-sizing: border-box;
+    padding: 34px 36px 37px;
+  }
+}

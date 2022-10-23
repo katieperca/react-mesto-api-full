@@ -1,0 +1,15 @@
+.header__nav-logout {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 24px;
+  background-color: transparent;
+  color: #A9A9A9;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .header__nav-logout  {
+
+  }
+}
