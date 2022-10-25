@@ -31,20 +31,21 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const history = useHistory();
 
-  function tokenCheck() {
+  React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
         if (res) {
           setUserEmail(res.email);
           setLoggedIn(true);
+          history.push('/');
         }
       })
       .catch((err) => {
         console.log('Ой, ошибка', err);
       });
     }
-  }
+  });
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -57,16 +58,6 @@ function App() {
         });
     }
   }, [loggedIn]);
-
-  React.useEffect(() => {
-    tokenCheck();
-  }, [loggedIn]);
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      history.push('/');
-    }
-  }, [history, loggedIn]);
 
   function onRegister(email, password) {
     auth.register(email, password)
@@ -88,6 +79,7 @@ function App() {
     .then((res) => {
       if (res.token) {
         localStorage.setItem('jwt', res.token);
+        api.setToken();
         setLoggedIn(true);
         history.push('/');
       }

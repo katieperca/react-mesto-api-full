@@ -103,6 +103,10 @@ class Api {
     })
     .then(this._checkResponse);
   }
+
+  setToken() {
+    this._headers['Authorization'] = `Bearer ${localStorage.getItem('jwt')}`;
+  }
 }
 
 const jwt = localStorage.getItem('jwt');
