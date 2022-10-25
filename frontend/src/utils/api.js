@@ -15,6 +15,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
@@ -23,6 +24,7 @@ class Api {
   addCard(cardName, cardLink) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: cardName,
@@ -35,6 +37,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
@@ -43,6 +46,7 @@ class Api {
   getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
@@ -51,6 +55,7 @@ class Api {
   updateUserData(userName, userInfo) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: userName,
@@ -63,6 +68,7 @@ class Api {
   updateAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: link
@@ -74,6 +80,7 @@ class Api {
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
@@ -82,6 +89,7 @@ class Api {
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
@@ -90,18 +98,20 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
+      credentials: 'include',
       headers: this._headers
     })
     .then(this._checkResponse);
   }
 }
 
+const jwt = localStorage.getItem('jwt');
 
 const api = new Api({
   baseUrl: 'http://api.mesto.katieperca.nomoredomains.icu',
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}`,
   }
 });
 

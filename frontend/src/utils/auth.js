@@ -40,7 +40,6 @@ class Auth {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       }
@@ -53,7 +52,7 @@ const auth = new Auth({
   baseUrl: 'http://api.mesto.katieperca.nomoredomains.icu',
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 

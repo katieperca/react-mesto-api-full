@@ -36,7 +36,7 @@ function App() {
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
         if (res) {
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
           setLoggedIn(true);
         }
       })
@@ -47,14 +47,16 @@ function App() {
   }
 
   React.useEffect(() => {
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then(([data, cards]) => {
-        setCurrentUser(data);
-        setCards(cards);
-      }).catch((err) => {
-        console.log('Ой, ошибка', err);
-      });
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([data, cards]) => {
+          setCurrentUser(data);
+          setCards(cards);
+        }).catch((err) => {
+          console.log('Ой, ошибка', err);
+        });
+    }
+  }, [loggedIn]);
 
   React.useEffect(() => {
     tokenCheck();
@@ -72,7 +74,7 @@ function App() {
       if (res) {
         setIsRegisterSucceed(true);
         setIsInfoTooltipOpen(true);
-        history.push('/sign-in');
+        history.push('/signin');
       }
     }).catch((err) => {
       setIsInfoTooltipOpen(true);
@@ -132,7 +134,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -198,19 +200,19 @@ function App() {
             component={Main}
             loggedIn={loggedIn}
           />
-          <Route path='/sign-up'>
+          <Route path='/signup'>
             <Register
-            onRegister={onRegister}
+              onRegister={onRegister}
             />
           </Route>
-          <Route path='/sign-in'>
+          <Route path='/signin'>
             <Login
               history={history}
               onLogIn={onLogIn}
             />
           </Route>
           <Route>
-            {loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-in' />}
+            {loggedIn ? <Redirect to='/' /> : <Redirect to='/signin' />}
           </Route>
         </Switch>
         <Footer />
