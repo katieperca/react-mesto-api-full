@@ -112,7 +112,7 @@ class Api {
 const jwt = localStorage.getItem('jwt');
 
 const api = new Api({
-  baseUrl: 'http://api.mesto.katieperca.nomoredomains.icu',
+  baseUrl: 'https://api.mesto.katieperca.nomoredomains.icu',
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${jwt}`,

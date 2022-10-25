@@ -50,7 +50,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://api.mesto.katieperca.nomoredomains.icu',
+  baseUrl: 'https://api.mesto.katieperca.nomoredomains.icu',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
